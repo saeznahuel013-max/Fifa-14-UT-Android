@@ -1,20 +1,46 @@
-const net = require('net');
-
+const express = require('express');
+const app = express();
 const PORT = process.env.PORT || 8080;
 
-const server = net.createServer((socket) => {
-    console.log('¡Juego conectado!');
+// Middleware para entender datos de FIFA
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-    socket.on('data', (data) => {
-        console.log('Recibido del FIFA:', data.toString('hex')); // Ver el paquete en Hexadecimal
-        
-        // Aquí es donde emularemos la respuesta de EA
-        // Por ahora, solo mandamos un "OK" básico si sabemos el protocolo
+// 1. Endpoint de Autenticación (Login)
+// El juego suele buscar esta ruta para validar al usuario
+app.post('/ut/game/fifa14/auth', (req, res) => {
+    console.log("Intentando iniciar sesión...");
+    
+    // Respondemos con un Token de sesión falso (esto engaña al juego)
+    res.json({
+        "protocol": "https",
+        "ip": "tu-proyecto.up.railway.app", 
+        "serverTime": new Date().toISOString(),
+        "lastLogin": new Date().toISOString(),
+        "sessionToken": "Nahu-Token-2026-XYZ", // Token inventado
+        "sku": "FUT14AND"
     });
-
-    socket.on('error', (err) => console.log('Error:', err.message));
 });
 
-server.listen(PORT, () => {
-    console.log(`Proxy TCP escuchando en puerto ${PORT}`);
+// 2. Información del Usuario (Monedas y Nivel)
+app.get('/ut/game/fifa14/user/accountinfo', (req, res) => {
+    res.json({
+        "personaName": "Nahuel_Owner",
+        "coins": 999999,
+        "fcPoints": 5000,
+        "level": 50,
+        "xp": 100000
+    });
+});
+
+// 3. Estado de los servidores (Para que el círculo no gire infinito)
+app.get('/ut/game/fifa14/status', (req, res) => {
+    res.json({
+        "status": "UP",
+        "isMaintenance": false
+    });
+});
+
+app.listen(PORT, () => {
+    console.log(`Servidor de Login FIFA 14 corriendo en puerto ${PORT}`);
 });
