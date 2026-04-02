@@ -44,3 +44,16 @@ app.get('/ut/game/fifa14/status', (req, res) => {
 app.listen(PORT, () => {
     console.log(`Servidor de Login FIFA 14 corriendo en puerto ${PORT}`);
 });
+
+
+// Ruta de validación de Origin
+app.get('/identity/login', (req, res) => {
+    console.log("Simulando respuesta de Origin...");
+    res.header("Content-Type", "application/xml"); // Origin solía usar XML en esa época
+    res.send(`<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+        <login>
+            <status>success</status>
+            <userId>123456789</userId>
+            <personaId>987654321</personaId>
+        </login>`);
+});
