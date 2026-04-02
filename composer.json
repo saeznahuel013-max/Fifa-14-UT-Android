@@ -4,18 +4,24 @@
     "authors": [
         {
             "name": "Eduard Bess",
-            "email": "eduard.bess@gmail.com"
+            "email": "eduard.ess@gmail.com"
         }
     ],
     "license": "MIT",
     "autoload": {
-        "psr-0" : {
-            "Fut" : "src"
+        "psr-0": {
+            "Fut": "src"
         }
     },
     "require": {
-        "guzzlehttp/guzzle": "4.1.*",
-	    "fut/eahashor": "1.0.0",
-	    "fut/request-forge": "2.0.*"
+        "php": ">=7.4",
+        "guzzlehttp/guzzle": "^6.0|^7.0",
+        "fut/ezhashor": "1.0.0",
+        "fut/request-forge": "2.0.*"
+    },
+    "config": {
+        "allow-plugins": {
+            "kylekatarnls/update-helper": true
+        }
     }
 }
