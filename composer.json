@@ -1,12 +1,6 @@
 {
     "name": "fut/connectors",
     "description": "Connectors for Fifa Ultimate Team.",
-    "authors": [
-        {
-            "name": "Eduard Bess",
-            "email": "eduard.ess@gmail.com"
-        }
-    ],
     "license": "MIT",
     "autoload": {
         "psr-0": {
@@ -14,14 +8,6 @@
         }
     },
     "require": {
-        "php": ">=7.4",
-        "guzzlehttp/guzzle": "^6.0|^7.0",
-        "fut/ezhashor": "1.0.0",
-        "fut/request-forge": "2.0.*"
-    },
-    "config": {
-        "allow-plugins": {
-            "kylekatarnls/update-helper": true
-        }
+        "guzzlehttp/guzzle": "*"
     }
 }
